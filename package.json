@@ -16,8 +16,13 @@
     "dev:postgres": "docker compose up -d postgres",
     "dev:backend": "mvn -f backend/pom.xml spring-boot:run",
     "dev:frontend": "npm --workspace frontend run dev -- --host 0.0.0.0",
-    "build": "npm --workspace frontend run build && mvn -f backend/pom.xml -DskipTests package",
-    "test": "npm --workspace frontend run lint && mvn -f backend/pom.xml test"
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:backend": "mvn -f backend/pom.xml -DskipTests package",
+    "build:frontend": "npm --workspace frontend run build",
+    "check": "npm run test && npm run build",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:backend": "mvn -f backend/pom.xml test",
+    "test:frontend": "npm --workspace frontend run lint"
   },
   "devDependencies": {
     "concurrently": "^9.2.1"

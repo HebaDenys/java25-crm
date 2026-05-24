@@ -9,12 +9,12 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public record CreateLeadRequest(
-        @NotBlank String contactName,
-        @NotBlank String companyName,
-        @Email String email,
-        @NotNull LeadStage stage,
-        @NotNull @PositiveOrZero BigDecimal estimatedValue,
-        @NotBlank String ownerName,
-        @NotBlank String nextAction,
+        @NotBlank(message = "Contact name is required") String contactName,
+        @NotBlank(message = "Company name is required") String companyName,
+        @Email(message = "Email must be valid") String email,
+        @NotNull(message = "Stage is required") LeadStage stage,
+        @NotNull(message = "Estimated value is required") @PositiveOrZero(message = "Estimated value must be zero or greater") BigDecimal estimatedValue,
+        @NotBlank(message = "Owner name is required") String ownerName,
+        @NotBlank(message = "Next action is required") String nextAction,
         LocalDate nextActionDate) {
 }

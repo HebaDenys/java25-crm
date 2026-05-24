@@ -77,6 +77,21 @@ The application will be available at:
 - Backend health: <http://localhost:8080/actuator/health>
 - Keycloak: <http://localhost:8081>
 
+## Development Documentation
+
+- [Architecture](docs/architecture.md)
+- [Development Guide](docs/development.md)
+
+## Quality Checks
+
+Run the full local verification suite:
+
+```bash
+npm run check
+```
+
+The project also runs GitHub Actions CI on pushes to `main` and pull requests. Backend integration tests use H2 in PostgreSQL compatibility mode for a fast local feedback loop, while the running application uses PostgreSQL through Docker Compose.
+
 ## MVP Roadmap
 
 The first implementation phase should focus on the core workflows a sales team needs every day:
