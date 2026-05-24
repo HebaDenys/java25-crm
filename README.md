@@ -1,8 +1,6 @@
 # Java25 CRM
 
-Java25 CRM is a planned full-stack customer relationship management platform for sales teams. The goal is to build one clean, production-minded project that combines a Java 25 backend, PostgreSQL data storage, and a React frontend into a practical CRM for managing leads, companies, deals, activities, and customer relationships.
-
-This repository starts as the public planning home for the project. The implementation will be added gradually after the product scope, architecture, and development workflow are defined clearly.
+Java25 CRM is a full-stack customer relationship management platform for sales teams. The project combines a Java 25 backend, PostgreSQL data storage, and a React frontend into a practical CRM for managing leads, companies, deals, activities, and customer relationships.
 
 ## Vision
 
@@ -14,26 +12,70 @@ The first version will focus on a single-organization CRM to keep the foundation
 
 | Area | Technology |
 | --- | --- |
-| Backend | Java 25, Spring Boot |
-| Frontend | React, TypeScript, Vite |
+| Backend | Java 25, Spring Boot 4 |
+| Frontend | Node 24, React, TypeScript, Vite |
 | Database | PostgreSQL |
 | Local infrastructure | Docker Compose |
 | Authentication | Keycloak |
 | API style | REST JSON first, with GraphQL evaluated later if needed |
 | Repository model | Monorepo |
 
-## Intended Architecture
+## Architecture
 
-The future project is expected to use a monorepo layout with separate backend and frontend applications:
+The project uses a monorepo layout with separate backend and frontend applications:
 
 ```text
 java25-crm/
-  backend/     # Java 25 + Spring Boot API
-  frontend/    # React + TypeScript + Vite app
-  infra/       # Docker Compose and local infrastructure configuration
+  backend/             # Java 25 + Spring Boot 4 REST API
+  frontend/            # Node 24 + React + TypeScript + Vite app
+  docker-compose.yml   # PostgreSQL and Keycloak for local development
 ```
 
 The backend will expose the CRM domain through REST APIs, persist data in PostgreSQL, and integrate with Keycloak for authentication and authorization. The frontend will provide the sales workspace for managing records, pipeline activity, dashboards, and daily sales tasks.
+
+## Running Locally
+
+Requirements:
+
+- Java 25
+- Node.js 24
+- npm 11+
+- Docker with Docker Compose
+- Maven 3.9+
+
+If your shell is not already using Java 25, switch it first. On this machine the local helper is:
+
+```bash
+jswitch 25 permsys
+```
+
+Or set `JAVA_HOME` to the installed JDK 25 path before running Maven.
+
+Start PostgreSQL and Keycloak:
+
+```bash
+npm run dev:infra
+```
+
+Install frontend/root dependencies:
+
+```bash
+npm install
+```
+
+Run the backend and frontend in separate terminals:
+
+```bash
+npm run dev:backend
+npm run dev:frontend
+```
+
+The application will be available at:
+
+- Frontend: <http://localhost:5173>
+- Backend API: <http://localhost:8080/api>
+- Backend health: <http://localhost:8080/actuator/health>
+- Keycloak: <http://localhost:8081>
 
 ## MVP Roadmap
 
@@ -74,7 +116,7 @@ After the core CRM is usable, the project can grow into broader business workflo
 
 ## Project Status
 
-Planning stage. This repository currently contains only the initial project description, license, and ignore rules. Backend, frontend, database, authentication, and infrastructure code will be added in later milestones.
+Initial implementation stage. The repository includes a runnable Spring Boot 4 API, PostgreSQL migrations with seed CRM data, a React/Vite dashboard, and Docker Compose services for PostgreSQL and Keycloak.
 
 ## License
 
